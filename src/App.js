@@ -7,7 +7,16 @@ function App() {
       <header>
         <Nav />
       </header>
-      <main></main>
+      <main className="p-5 lg:p-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
+          <div>Grid1</div>
+          <div>Grid1</div>
+          <div>Grid1</div>
+          <div>Grid1</div>
+          <div>Grid1</div>
+          <div>Grid1</div>
+        </div>
+      </main>
       <footer className="flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-slate-50">
         <div className="h-10 w-10">
           <a href="/">
