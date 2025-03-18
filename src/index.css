@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
+.App {
+  @apply bg-slate-50;
+}
+nav a {
   @apply transition hover:text-cyan-600 uppercase;
+}
+
+h1 {
+  @apply text-2xl font-bold mb-10;
+}
+
+.card {
+  @apply p-5 rounded-lg shadow-lg;
+}
+.card-spacing {
+  @apply flex flex-col gap-5;
+}
+h2 {
+  @apply text-cyan-800 text-lg font-medium;
 }

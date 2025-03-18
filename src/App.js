@@ -8,8 +8,21 @@ function App() {
         <Nav />
       </header>
       <main className="p-5 lg:p-10">
+        <h1>Lovely Cats</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
-          <div>Grid1</div>
+          <a className="card" href="/" target="_blank">
+            <div className="card-spacing">
+              <img src="" alt="placeholder" />
+              <div>
+                <h2>Cat 1</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                  aliquyam
+                </p>
+              </div>
+            </div>
+          </a>
           <div>Grid1</div>
           <div>Grid1</div>
           <div>Grid1</div>
