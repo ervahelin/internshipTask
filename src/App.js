@@ -1,7 +1,45 @@
 import "./App.css";
 import Nav from "./components/nav";
+import { useState, useEffect } from "react";
+
+const breedUrl = `https://api.thecatapi.com/v1/breeds?limit=6`;
+const api_key =
+  "live_h6ibyvAtRfJq3k0gKDNy4dBxcg3OC4yUOBK7EIxyqPHejbj8vUXHxPzxffW5T1uX";
 
 function App() {
+  const [breeds, setBreeds] = useState([]);
+
+  useEffect(() => {
+    async function fetchBreeds() {
+      try {
+        // fetch breeds
+        const response = await fetch(breedUrl, {
+          headers: { "x-api-key": api_key },
+        });
+        const data = await response.json();
+
+        // fetch images for each breed
+        const breedsWithImages = await Promise.all(
+          data.map(async (breed) => {
+            const imageResponse = await fetch(
+              `https://api.thecatapi.com/v1/images/${breed.reference_image_id}`,
+              {
+                headers: { "x-api-key": api_key },
+              }
+            );
+            const imageData = await imageResponse.json();
+            return { ...breed, imageUrl: imageData.url };
+          })
+        );
+
+        setBreeds(breedsWithImages);
+      } catch (error) {
+        console.error("Error fetching breeds:", error);
+      }
+    }
+
+    fetchBreeds();
+  }, []);
   return (
     <div className="App">
       <header>
@@ -10,24 +48,18 @@ function App() {
       <main className="p-5 lg:p-10">
         <h1>Lovely Cats</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
-          <a className="card" href="/" target="_blank">
-            <div className="card-spacing">
-              <img src="" alt="placeholder" />
-              <div>
-                <h2>Cat 1</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam
-                </p>
+          {breeds.map((breed) => (
+            <div key={breed.id} className="card">
+              <div className="card-spacing">
+                <img src={breed.imageUrl} alt={breed.name} width="300" />
+                <div>
+                  <h2>{breed.name}</h2>
+                  <p>Origin: {breed.origin}</p>
+                  <p>{breed.description}</p>
+                </div>
               </div>
             </div>
-          </a>
-          <div>Grid1</div>
-          <div>Grid1</div>
-          <div>Grid1</div>
-          <div>Grid1</div>
-          <div>Grid1</div>
+          ))}
         </div>
       </main>
       <footer className="flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-slate-50">
