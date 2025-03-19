@@ -3,8 +3,7 @@ import Nav from "./components/nav";
 import { useState, useEffect } from "react";
 
 const breedUrl = `https://api.thecatapi.com/v1/breeds?limit=6`;
-const api_key =
-  "live_h6ibyvAtRfJq3k0gKDNy4dBxcg3OC4yUOBK7EIxyqPHejbj8vUXHxPzxffW5T1uX";
+const api_key = process.env.CAT_API_KEY;
 
 function App() {
   const [breeds, setBreeds] = useState([]);
