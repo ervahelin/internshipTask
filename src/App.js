@@ -8,19 +8,21 @@ const api_key =
 
 function App() {
   const [breeds, setBreeds] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function fetchBreeds() {
       try {
-        // fetch breeds
         const response = await fetch(breedUrl, {
           headers: { "x-api-key": api_key },
         });
         const data = await response.json();
 
-        // fetch images for each breed
+        // Fetch images for each breed
         const breedsWithImages = await Promise.all(
           data.map(async (breed) => {
+            if (!breed.reference_image_id) return { ...breed, imageUrl: "" };
+
             const imageResponse = await fetch(
               `https://api.thecatapi.com/v1/images/${breed.reference_image_id}`,
               {
@@ -40,32 +42,61 @@ function App() {
 
     fetchBreeds();
   }, []);
+
+  // Trigger filter after 3 letters
+  const filteredBreeds =
+    searchTerm.length >= 3
+      ? breeds.filter((breed) =>
+          breed.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : breeds;
+
   return (
     <div className="App">
       <header>
         <Nav />
       </header>
       <main className="p-5 lg:p-10">
-        <h1>Lovely Cats</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
-          {breeds.map((breed) => (
-            <div key={breed.id} className="card">
-              <div className="card-spacing">
-                <img src={breed.imageUrl} alt={breed.name} width="300" />
-                <div>
-                  <h2>{breed.name}</h2>
-                  <p>Origin: {breed.origin}</p>
-                  <p>{breed.description}</p>
+        <div className="flex flex-row items-center justify-between">
+          <h1>Lovely Cats</h1>
+          {/* Search */}
+          <input
+            type="text"
+            placeholder="Search for a cat breed..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border p-2 mb-5 w-full lg:w-1/3"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {filteredBreeds.length > 0 ? (
+            filteredBreeds.map((breed) => (
+              <div key={breed.id} className="card">
+                <div className="card-spacing">
+                  {breed.imageUrl ? (
+                    <img src={breed.imageUrl} alt={breed.name} width="300" />
+                  ) : (
+                    <p>No image available</p>
+                  )}
+                  <div>
+                    <h2>{breed.name}</h2>
+                    <p>Origin: {breed.origin}</p>
+                    <p>{breed.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No breeds match your search.</p>
+          )}
         </div>
       </main>
+
       <footer className="flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-slate-50">
         <div className="h-10 w-10">
           <a href="/">
-            <img src="logo.svg" alt="Logo"></img>
+            <img src="logo.svg" alt="Logo" />
           </a>
         </div>
         <div>
