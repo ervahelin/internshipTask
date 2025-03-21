@@ -36,9 +36,11 @@ function App() {
         );
 
         setBreeds(breedsWithImages);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching breeds:", error);
+      }
+      finally {
+        setLoading(false);
       }
     }
 
