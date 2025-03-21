@@ -1,7 +1,6 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+# How to interact with this website
+This website displays a list of cat breeds, allowing users to click on a breed's card to navigate to its Wikipedia page. Additionally, a search function filters breeds dynamically after typing at least three letters.
+ 
 ## Available Scripts
 
 In the project directory, you can run:
