@@ -85,7 +85,7 @@ function App() {
                   <div>
                     <h2>{breed.name}</h2>
                     <p className="text-zinc-500 pb-4">Origin: {breed.origin}</p>
-                    <p>{breed.description}</p>
+                    <p className="font-light">{breed.description}</p>
                   </div>
                 </div>
               </div>
@@ -117,9 +117,11 @@ function App() {
         </div>
         <div className="flex flex-col">
           <span className="font-bold">Max Mustermann</span>
-          <span>Mariahilfer Straße 10</span>
-          <span>1070 Wien, Österreich</span>
-          <span>+43 660 1234567</span>
+          <div className="font-light flex flex-col">
+            <span>Mariahilfer Straße 10</span>
+            <span>1070 Wien, Österreich</span>
+            <span>+43 660 1234567</span>
+          </div>
         </div>
       </footer>
     </div>

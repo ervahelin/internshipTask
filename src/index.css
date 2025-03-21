@@ -3,22 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme {
-  --font-jost: "Jost", sans-serif;
-  --font-marker: "Permanent Marker", cursive;
-  --font-amatic: "Amatic SC", sans-serif;
-  --font-poiret: "Poiret One", sans-serif;
-}
 
 .App {
-  @apply bg-rose-50 flex flex-col gap-20;
+  @apply bg-rose-50 flex flex-col gap-20 font-jost;
 }
 nav a {
   @apply transition text-rose-600 hover:text-rose-800;
 }
 
 h1 {
-  @apply text-4xl font-bold mb-5 text-rose-600 uppercase;
+  @apply  text-5xl lg:text-7xl font-bold mb-5 text-rose-600 uppercase font-marker;
 }
 
 .card {
@@ -34,7 +28,7 @@ h2 {
   @apply text-rose-800 text-lg font-medium;
 }
 input {
-  @apply rounded-lg border-rose-800 bg-opacity-10;
+  @apply rounded-lg border-rose-600 bg-opacity-5;
 }
 footer {
   @apply flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-rose-800 text-white;
