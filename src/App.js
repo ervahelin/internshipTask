@@ -8,15 +8,17 @@ const api_key = process.env.CAT_API_KEY;
 function App() {
   const [breeds, setBreeds] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     async function fetchBreeds() {
       try {
+        setLoading(true);
         const response = await fetch(breedUrl, {
           headers: { "x-api-key": api_key },
         });
         const data = await response.json();
-
+       
         // Fetch images for each breed
         const breedsWithImages = await Promise.all(
           data.map(async (breed) => {
@@ -34,6 +36,7 @@ function App() {
         );
 
         setBreeds(breedsWithImages);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching breeds:", error);
       }
@@ -57,7 +60,7 @@ function App() {
       </header>
       <main className="px-5 lg:px-16 lg:min-h-96">
         <div className="flex flex-col items-center pb-20">
-          <h1 className="font-marker">Lovely Cats</h1>
+          <h1>Lovely Cats</h1>
           {/* Search */}
           <input
             type="text"
@@ -67,7 +70,9 @@ function App() {
             className="border p-2 mb-5 w-full lg:w-1/3"
           />
         </div>
-
+        {loading ? (
+          <p>Loading breeds...</p>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredBreeds.length > 0 ? (
             filteredBreeds.map((breed) => (
@@ -94,6 +99,7 @@ function App() {
             <p>No breeds match your search.</p>
           )}
         </div>
+        )}
       </main>
 
       <footer>
