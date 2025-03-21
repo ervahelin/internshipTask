@@ -1,6 +1,6 @@
 # How to interact with this website
-This website displays a list of cat breeds, allowing users to click on a breed's card to navigate to its Wikipedia page. Additionally, a search function filters breeds dynamically after typing at least three letters.
- 
+This website displays a list of cat breeds, allowing users to click on a breed's card to navigate to its Wikipedia page. Additionally, a search function filters breeds dynamically after typing at least three letters. To start the project you have to run it in the project directory with `npm start`.
+  
 ## Available Scripts
 
 In the project directory, you can run:
