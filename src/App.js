@@ -76,7 +76,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredBreeds.length > 0 ? (
             filteredBreeds.map((breed) => (
-              <div key={breed.id} className="card">
+              <a href={breed.wikipedia_url} target="_blank" key={breed.id} className="card">
                 <div className="card-spacing">
                   {breed.imageUrl ? (
                     <img
@@ -93,7 +93,7 @@ function App() {
                     <p className="font-light">{breed.description}</p>
                   </div>
                 </div>
-              </div>
+              </a>
             ))
           ) : (
             <p>No breeds match your search.</p>
