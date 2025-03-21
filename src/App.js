@@ -2,7 +2,7 @@ import "./App.css";
 import Nav from "./components/nav";
 import { useState, useEffect } from "react";
 
-const breedUrl = `https://api.thecatapi.com/v1/breeds?limit=6`;
+const breedUrl = `https://api.thecatapi.com/v1/breeds?limit=3`;
 const api_key = process.env.CAT_API_KEY;
 
 function App() {
@@ -55,9 +55,9 @@ function App() {
       <header>
         <Nav />
       </header>
-      <main className="p-5 lg:p-10">
-        <div className="flex flex-row items-center justify-between">
-          <h1>Lovely Cats</h1>
+      <main className="px-5 lg:px-16 lg:min-h-96">
+        <div className="flex flex-col items-center pb-20">
+          <h1 className="font-marker">Lovely Cats</h1>
           {/* Search */}
           <input
             type="text"
@@ -74,13 +74,17 @@ function App() {
               <div key={breed.id} className="card">
                 <div className="card-spacing">
                   {breed.imageUrl ? (
-                    <img src={breed.imageUrl} alt={breed.name} width="300" />
+                    <img
+                      src={breed.imageUrl}
+                      alt={breed.name}
+                      className="w-full h-[250px] object-cover"
+                    />
                   ) : (
                     <p>No image available</p>
                   )}
                   <div>
                     <h2>{breed.name}</h2>
-                    <p>Origin: {breed.origin}</p>
+                    <p className="text-zinc-500 pb-4">Origin: {breed.origin}</p>
                     <p>{breed.description}</p>
                   </div>
                 </div>
@@ -92,10 +96,10 @@ function App() {
         </div>
       </main>
 
-      <footer className="flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-slate-50">
+      <footer>
         <div className="h-10 w-10">
           <a href="/">
-            <img src="logo.svg" alt="Logo" />
+            <img src="logo.png" alt="Logo" className="invert" />
           </a>
         </div>
         <div>

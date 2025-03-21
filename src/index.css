@@ -1,24 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&family=Permanent+Marker&family=Poiret+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --font-jost: "Jost", sans-serif;
+  --font-marker: "Permanent Marker", cursive;
+  --font-amatic: "Amatic SC", sans-serif;
+  --font-poiret: "Poiret One", sans-serif;
+}
+
 .App {
-  @apply bg-slate-50;
+  @apply bg-rose-50 flex flex-col gap-20;
 }
 nav a {
-  @apply transition hover:text-cyan-600 uppercase;
+  @apply transition text-rose-600 hover:text-rose-800;
 }
 
 h1 {
-  @apply text-2xl font-bold mb-10;
+  @apply text-4xl font-bold mb-5 text-rose-600 uppercase;
 }
 
 .card {
-  @apply p-5 rounded-lg shadow-lg;
+  @apply py-5 rounded-xl;
 }
 .card-spacing {
-  @apply flex flex-col gap-5;
+  @apply flex flex-col gap-10;
+}
+.card-spacing img {
+  @apply rounded-2xl;
 }
 h2 {
-  @apply text-cyan-800 text-lg font-medium;
+  @apply text-rose-800 text-lg font-medium;
+}
+input {
+  @apply rounded-lg border-rose-800 bg-opacity-10;
+}
+footer {
+  @apply flex flex-col lg:flex-row gap-5 px-5 lg:px-10 py-5 lg:items-center lg:justify-between bg-rose-800 text-white;
+}
+
+footer a{
+  @apply hover:text-rose-200;
 }
